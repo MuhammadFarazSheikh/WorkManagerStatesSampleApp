@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -13,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 
@@ -40,7 +42,10 @@ class MainActivity : AppCompatActivity() {
     fun mainContent()
     {
         ConstraintLayout(
-            modifier = Modifier.fillMaxWidth().fillMaxHeight()
+            modifier = Modifier
+                .padding(10.dp,10.dp,10.dp,0.dp)
+                .fillMaxWidth()
+                .fillMaxHeight()
         ) {
             var (runOneTime) = createRefs()
             Button(
@@ -53,7 +58,8 @@ class MainActivity : AppCompatActivity() {
                 Text(
                     stringResource(R.string.run_onetime_workmanager),
                     fontSize = 12.sp,
-                    fontWeight = FontWeight.SemiBold
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.White
                 )
             }
         }
