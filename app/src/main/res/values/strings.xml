@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">WorkManagerSampleApp</string>
     <string name="text_title">Work Manager States</string>
-    <string name="run_onetime_workmanager">Immediate/One Time</string>
+    <string name="run_onetime_workmanager">One Time</string>
 </resources>
