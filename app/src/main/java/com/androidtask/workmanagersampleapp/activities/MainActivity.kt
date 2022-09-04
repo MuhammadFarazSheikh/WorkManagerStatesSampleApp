@@ -2,6 +2,7 @@ package com.androidtask.workmanagersampleapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,11 +17,23 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.work.BackoffPolicy
+import androidx.work.OneTimeWorkRequest
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.androidtask.workmanagersampleapp.R
+import com.androidtask.workmanagersampleapp.utils.runOneTimeWorker
+import com.androidtask.workmanagersampleapp.workmanager.OneTimeWorkManager
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        setContent {
+            mainStructure()
+        }
     }
 
     @Composable
@@ -43,13 +56,15 @@ class MainActivity : AppCompatActivity() {
     {
         ConstraintLayout(
             modifier = Modifier
-                .padding(10.dp,10.dp,10.dp,0.dp)
+                .padding(10.dp, 10.dp, 10.dp, 0.dp)
                 .fillMaxWidth()
                 .fillMaxHeight()
         ) {
             var (runOneTime) = createRefs()
             Button(
-                onClick = { /*TODO*/ },
+                onClick = {
+                          runOneTimeWorker(this@MainActivity)
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight(),
