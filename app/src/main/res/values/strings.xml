@@ -2,4 +2,9 @@
     <string name="app_name">WorkManagerSampleApp</string>
     <string name="text_title">Work Manager States</string>
     <string name="run_onetime_workmanager">One Time</string>
+    <string name="txt_state_blocked">Blocked</string>
+    <string name="txt_state_cancelled">Cancelled</string>
+    <string name="txt_state_enqueued">Enqueued</string>
+    <string name="txt_state_running">Running</string>
+    <string name="txt_state_failed">Failed</string>
 </resources>

@@ -50,6 +50,47 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    fun getWorkerManagerResponse()
+    {
+        runOneTimeWorker(this@MainActivity, Observer { oneTimeWorkManagerListener->
+            if (oneTimeWorkManagerListener.state == WorkInfo.State.SUCCEEDED) {
+                Toast.makeText(
+                    this@MainActivity,
+                    oneTimeWorkManagerListener.outputData.getString("api_results"),Toast.LENGTH_SHORT).show()
+            }
+            else if(oneTimeWorkManagerListener.state == WorkInfo.State.BLOCKED)
+            {
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.txt_state_blocked),Toast.LENGTH_SHORT).show()
+            }
+            else if(oneTimeWorkManagerListener.state == WorkInfo.State.CANCELLED)
+            {
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.txt_state_cancelled),Toast.LENGTH_SHORT).show()
+            }
+            else if(oneTimeWorkManagerListener.state == WorkInfo.State.ENQUEUED)
+            {
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.txt_state_enqueued),Toast.LENGTH_SHORT).show()
+            }
+            else if(oneTimeWorkManagerListener.state == WorkInfo.State.RUNNING)
+            {
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.txt_state_running),Toast.LENGTH_SHORT).show()
+            }
+            else if(oneTimeWorkManagerListener.state == WorkInfo.State.FAILED)
+            {
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.txt_state_failed),Toast.LENGTH_SHORT).show()
+            }
+        },this@MainActivity)
+    }
+
     @Composable
     fun mainContent()
     {
@@ -62,13 +103,7 @@ class MainActivity : AppCompatActivity() {
             var (runOneTime) = createRefs()
             Button(
                 onClick = {
-                          runOneTimeWorker(this@MainActivity, Observer { oneTimeWorkManagerListener->
-                              if (oneTimeWorkManagerListener.state == WorkInfo.State.SUCCEEDED) {
-                                  Toast.makeText(
-                                      this@MainActivity,
-                                      oneTimeWorkManagerListener.outputData.getString("api_results"),Toast.LENGTH_SHORT).show()
-                              }
-                          },this@MainActivity)
+                          getWorkerManagerResponse()
                 },
                 modifier = Modifier
                     .fillMaxWidth()
