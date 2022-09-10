@@ -7,7 +7,7 @@ import androidx.work.workDataOf
 import com.montymobile.callsignature.networking.ApiEndPoints
 import com.montymobile.callsignature.networking.buildApiServiceForWeatherUpdates
 
-class OneTimeWorkManager(
+class PeriodicWorkManager(
     context: Context,
     workerParameters: WorkerParameters
 ) : Worker(
