@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.androidtask.workmanagersampleapp.R
+import com.androidtask.workmanagersampleapp.utils.cancelPeriodicWorkManagerById
 import com.androidtask.workmanagersampleapp.utils.getOneTimeWorkManagerResponse
 import com.androidtask.workmanagersampleapp.utils.getPeriodicWorkManagerResponse
 
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                 .fillMaxWidth()
                 .fillMaxHeight()
         ) {
-            var (runOneTime,runPeriodicWorker) = createRefs()
+            var (runOneTime,runPeriodicWorker,cancelPeriodicWork) = createRefs()
             Button(
                 onClick = {
                           getOneTimeWorkManagerResponse(this@MainActivity,this@MainActivity)
@@ -88,6 +89,25 @@ class MainActivity : AppCompatActivity() {
             ) {
                 Text(
                     stringResource(R.string.run_periodic_workmanager),
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.White
+                )
+            }
+
+            Button(
+                onClick = {
+                    cancelPeriodicWorkManagerById(this@MainActivity)
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight().constrainAs(cancelPeriodicWork){
+                        top.linkTo(runPeriodicWorker.bottom)
+                    },
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.LightGray)
+            ) {
+                Text(
+                    stringResource(R.string.run_cancel_periodic_workmanager),
                     fontSize = 12.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.White

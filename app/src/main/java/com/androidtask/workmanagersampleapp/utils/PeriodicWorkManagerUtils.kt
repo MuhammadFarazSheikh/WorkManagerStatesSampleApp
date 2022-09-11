@@ -7,7 +7,10 @@ import androidx.lifecycle.Observer
 import androidx.work.*
 import com.androidtask.workmanagersampleapp.R
 import com.androidtask.workmanagersampleapp.workmanager.PeriodicWorkManager
+import java.util.*
 import java.util.concurrent.TimeUnit
+
+lateinit var periodicWorkManagerId:UUID
 
 fun runPeriodicWorkManager(context: Context,observer: Observer<WorkInfo>,lifecycleOwner: LifecycleOwner)
 {
@@ -18,10 +21,15 @@ fun runPeriodicWorkManager(context: Context,observer: Observer<WorkInfo>,lifecyc
     val periodicWorkRequest = PeriodicWorkRequestBuilder<PeriodicWorkManager>(1,TimeUnit.MINUTES)
         .setConstraints(constraintBuilder).build()
     WorkManager.getInstance(context).apply {
-        //enqueueUniquePeriodicWork("periodic_worker",ExistingPeriodicWorkPolicy.KEEP,periodicWorkRequest)
         enqueue(periodicWorkRequest)
-        getWorkInfoByIdLiveData(periodicWorkRequest.id).observe(lifecycleOwner,observer)
+        periodicWorkManagerId = periodicWorkRequest.id
+        getWorkInfoByIdLiveData(periodicWorkManagerId).observe(lifecycleOwner,observer)
     }
+}
+
+fun cancelPeriodicWorkManagerById(context: Context)
+{
+    WorkManager.getInstance(context).cancelWorkById(periodicWorkManagerId)
 }
 
 fun getPeriodicWorkManagerResponse(context: Context,lifecycleOwner: LifecycleOwner)

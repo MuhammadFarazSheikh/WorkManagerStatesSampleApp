@@ -8,4 +8,5 @@
     <string name="txt_state_running">Running</string>
     <string name="txt_state_failed">Failed</string>
     <string name="run_periodic_workmanager">Periodic Work Manager</string>
+    <string name="run_cancel_periodic_workmanager">Cancel periodic work manager</string>
 </resources>
